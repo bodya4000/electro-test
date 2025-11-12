@@ -2,17 +2,23 @@ const { app, BrowserWindow } = require('electron');
 
 // --- РОБОЧІ ФЛАГИ CHROMIUM ДЛЯ АПАРАТНОГО ПРИСКОРЕННЯ (VA-API) ---
 
-app.commandLine.appendSwitch('enable-features', 'V4L2VideoDecoder');
+// 1. Вмикаємо V4L2 декодер
+    app.commandLine.appendSwitch('enable-features', 'V4L2VideoDecoder');
+    
+    // 2. Вмикаємо загальне прискорення відео
+    app.commandLine.appendSwitch('enable-accelerated-video-decode');
+    
+    // 3. ЗМІНА: Використовуємо OpenGL ES (GLES), який є рідним для RPi
+    app.commandLine.appendSwitch('use-gl', 'gles'); 
 
-
-app.commandLine.appendSwitch('use-gl', 'egl');
-
-app.commandLine.appendSwitch('ignore-gpu-blocklist');
-
-app.commandLine.appendSwitch('enable-zero-copy');
-
-app.commandLine.appendSwitch('disable-features', 'UseChromeOSDirectVideoDecoder');
-
+    // 4. ДІАГНОСТИКА: Вимкнення пісочниці GPU (ТІЛЬКИ ДЛЯ ТЕСТУВАННЯ!)
+    // Якщо це спрацює, це ваша проблема!
+    app.commandLine.appendSwitch('disable-gpu-sandbox'); 
+    
+    // 5. Інші прапори
+    app.commandLine.appendSwitch('ignore-gpu-blocklist');
+    app.commandLine.appendSwitch('enable-zero-copy');
+    app.commandLine.appendSwitch('disable-features', 'UseChromeOSDirectVideoDecoder')
 // -----------------------------------------------------------------
 
 
@@ -50,8 +56,8 @@ function createWindows() {
 }
 
 app.whenReady().then(() => {
-	  console.log('GPU feature status:', app.getGPUFeatureStatus());
-	createWindows()
+    console.log('GPU feature status:', app.getGPUFeatureStatus());
+  createWindows()
 });
 
 app.on('window-all-closed', () => {

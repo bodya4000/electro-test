@@ -7,9 +7,6 @@ app.commandLine.appendSwitch(
 );
 
 app.commandLine.appendSwitch('disable-gpu-sandbox'); 
-app.commandLine.appendSwitch('use-gl', 'desktop')
-app.commandLine.appendSwitch('ozone-platform-hint', 'x11');
-
 app.commandLine.appendSwitch('ignore-gpu-blocklist');
 app.commandLine.appendSwitch('enable-zero-copy');
 app.commandLine.appendSwitch('disable-features', 'UseChromeOSDirectVideoDecoder');

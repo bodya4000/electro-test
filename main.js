@@ -23,20 +23,19 @@ function createWindows() {
   });
   mainWin.loadFile('index.html');
 
-  // Вікно 2: сторінка GPU / перевірка
-  // const gpuWin = new BrowserWindow({
-  //   width: 1000,
-  //   height: 800,
-  //   webPreferences: {
-  //     nodeIntegration: false,
-  //     contextIsolation: true
-  //   }
-  // });
+  const gpuWin = new BrowserWindow({
+    width: 1000,
+    height: 800,
+    webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true
+    }
+  });
 
-  // // Спроба відкрити chrome://gpu/
-  // gpuWin.loadURL('chrome://gpu').catch(() => {
-  //   // Якщо не працює, можна завантажити локальну сторінку з перевіркою WebGL/WebGPU
-  // });
+  // Спроба відкрити chrome://gpu/
+  gpuWin.loadURL('chrome://gpu').catch(() => {
+    // Якщо не працює, можна завантажити локальну сторінку з перевіркою WebGL/WebGPU
+  });
 
   // Відкриваємо DevTools у обох вікнах (за бажанням)
   mainWin.webContents.openDevTools();

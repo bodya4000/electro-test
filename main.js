@@ -3,22 +3,20 @@ const { app, BrowserWindow } = require('electron');
 // --- РОБОЧІ ФЛАГИ CHROMIUM ДЛЯ АПАРАТНОГО ПРИСКОРЕННЯ (VA-API) ---
 
 // 1. Вмикаємо V4L2 декодер
-    app.commandLine.appendSwitch('enable-features', 'V4L2VideoDecoder');
+    // Вмикаємо V4L2 декодер
+    app.commandLine.appendSwitch('enable-features', 'V4L2VideoDecoder,enable-accelerated-video-decode');
     
-    // 2. Вмикаємо загальне прискорення відео
-    app.commandLine.appendSwitch('enable-accelerated-video-decode');
+    // !!! КРОК 1: ЗМІНА НА DESKTOP (GLX) для X11
+    app.commandLine.appendSwitch('use-gl', 'desktop'); 
     
-    // 3. ЗМІНА: Використовуємо OpenGL ES (GLES), який є рідним для RPi
-    app.commandLine.appendSwitch('use-gl', 'gles'); 
-
-    // 4. ДІАГНОСТИКА: Вимкнення пісочниці GPU (ТІЛЬКИ ДЛЯ ТЕСТУВАННЯ!)
-    // Якщо це спрацює, це ваша проблема!
+    // !!! КРОК 2: Вимкнення пісочниці GPU (КРИТИЧНО)
     app.commandLine.appendSwitch('disable-gpu-sandbox'); 
     
-    // 5. Інші прапори
+    // Інші прапори
     app.commandLine.appendSwitch('ignore-gpu-blocklist');
     app.commandLine.appendSwitch('enable-zero-copy');
-    app.commandLine.appendSwitch('disable-features', 'UseChromeOSDirectVideoDecoder')
+    app.commandLine.appendSwitch('disable-features', 'UseChromeOSDirectVideoDecoder');
+
 // -----------------------------------------------------------------
 
 

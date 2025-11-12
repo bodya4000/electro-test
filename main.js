@@ -2,10 +2,8 @@ const { app, BrowserWindow } = require('electron');
 
 // --- РОБОЧІ ФЛАГИ CHROMIUM ДЛЯ АПАРАТНОГО ПРИСКОРЕННЯ (VA-API) ---
 
-app.commandLine.appendSwitch(
-    'enable-features', 
-    'VaapiVideoDecoder,VaapiVideoDecodeLinuxGL,VaapiIgnoreDriverChecks'
-);
+app.commandLine.appendSwitch('enable-features', 'V4L2VideoDecoder');
+
 
 app.commandLine.appendSwitch('use-gl', 'egl');
 

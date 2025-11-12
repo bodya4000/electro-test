@@ -1,13 +1,9 @@
 const { app, BrowserWindow } = require('electron');
 
-
-app.commandLine.appendSwitch(
-  'enable-features',
-  'AcceleratedVideoDecoder,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoDecodeLinuxZeroCopyGL'
-);
+app.commandLine.appendSwitch('ignore-gpu-blocklist');
+app.commandLine.appendSwitch('enable-features', 'V4L2VideoDecoder,VaapiVideoDecoder,AcceleratedVideoDecoder,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoDecodeLinuxZeroCopyGL');
 
 app.commandLine.appendSwitch('disable-gpu-sandbox'); 
-app.commandLine.appendSwitch('ignore-gpu-blocklist');
 app.commandLine.appendSwitch('enable-zero-copy');
 app.commandLine.appendSwitch('disable-features', 'UseChromeOSDirectVideoDecoder');
 

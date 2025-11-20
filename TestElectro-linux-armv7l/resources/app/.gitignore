@@ -1,5 +1,6 @@
 package-lock.json
 node_modules
-Release/**/*
-Release/*
-Release
+Test/**/*
+Test/*
+Test
+app.asar

@@ -32,6 +32,6 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "electron": "^22.3.13"
+    "electron": "^38.6.0"
   }
 }
